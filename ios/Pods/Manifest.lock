@@ -1,0 +1,33 @@
+PODS:
+  - RCTRestart (0.0.7):
+    - React
+  - React (0.56.0):
+    - React/Core (= 0.56.0)
+  - React/Core (0.56.0):
+    - yoga (= 0.56.0.React)
+  - React/RCTActionSheet (0.56.0):
+    - React/Core
+  - yoga (0.56.0.React)
+
+DEPENDENCIES:
+  - RCTRestart (from `../node_modules/react-native-restart/ios`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+EXTERNAL SOURCES:
+  RCTRestart:
+    :path: "../node_modules/react-native-restart/ios"
+  React:
+    :path: "../node_modules/react-native"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: 33b78751d7b022a68557327ec5ef67e0d18fd832
+
+COCOAPODS: 1.5.3
