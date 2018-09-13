@@ -1,6 +1,6 @@
 {
   "presets": ["react-native"],
-  "plugins": ["transform-react-jsx-source", "dynamic-import-node", ["module-resolver",
+  "plugins": ["dynamic-import-node", ["module-resolver",
     {
       "root": ["./src"],
       "extensions": [ ".ios.js", ".android.js", ".js" ],

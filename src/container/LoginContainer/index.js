@@ -1,71 +1,106 @@
 import React from 'react';
+import InputField from './input';
 import Login from 'screens/Login';
+import Auth0 from 'react-native-auth0';
 import { translate} from 'react-i18next';
+import { Toast, Form } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
-import { Content, Item, Input, Label, Toast, Form, Icon } from 'native-base';
+import {required, maxLength15, minLength8, email, alphaNumeric} from './validation'
 
-const required = value => (value ? undefined : 'Required');
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
-const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined;
-const minLength8 = minLength(8);
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined;
-const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters' : undefined;
+const domain = 'extranet-staging.eu.auth0.com';
+const auth0 = new Auth0({
+  domain: domain,
+  clientId: 'UPVG0QyxBGcHlJKb1wPhTOhMvsv6cXr7'
+});
 
 class LoginForm extends React.Component {
-  renderInput({ input, label, type, meta: { touched, error, warning } }) {
+  constructor(props) {
+		super(props);
+		this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  renderInput({ input: { name, onChange, value }, meta: { touched, error } }) {
+    let text;
+    let fieldName;
+
+    switch (name) {
+      case 'email':
+        text = 'Email:';
+        fieldName = 'email';
+        break;
+      default:
+        text = 'Password:';
+        fieldName = 'password';
+    }
     return (
-      <Content>
-        <Item error={error && touched} success={!error && touched}>
-          <Label style={{ fontSize: 12, color: '#fff' }}>
-            { input.name.toUpperCase() }
-          </Label>
-          <Input
-            ref={c => (this.textInput = c)}
-            secureTextEntry={input.name === 'password' ? true : false}
-            {...input}
-          />
-          {error && touched && <Icon name='close-circle' />}
-          {!error && touched && <Icon name='checkmark-circle' />}
-        </Item>
-      </Content>
+      <InputField
+        value={value}
+        onChange={onChange}
+        text={text}
+        fieldName={fieldName}
+        touched={touched}
+        error={error}
+      />
     );
   }
 
+  handleChange = name => value => {
+    this.setState({ [name]: value });
+  }
+
   async login() {
+    const { t } = this.props;
     if (this.props.valid) {
-      this.props.navigation.navigate('Drawer');
+      auth0.auth
+        .passwordRealm({
+            username: this.state.email,
+            password: this.state.password,
+            realm: 'Username-Password-Authentication',
+            scope: 'openid profile email',
+            audience: 'https://' + domain + '/userinfo'
+        })
+        .then(credentials => {
+          this.props.navigation.navigate('Drawer');
+        })
+        .catch(error => alert('Error', error));
     } else {
       Toast.show({
-        text: 'Enter Valid Username & password!',
+        text: t('login:error'),
         duration: 2000,
         type: 'danger',
-        position: 'bottom',
+        position: 'top',
         textStyle: { textAlign: 'center' },
       });
     }
   }
 
   render() {
-    const { t } = this.props;
+    const { t, navigation } = this.props;
     const form = (
       <Form>
-        <Field name={t('login:email')} component={this.renderInput} validate={[email, required]} />
+        <Field
+          name={t('login:email')}
+          component={this.renderInput}
+          onChange={this.handleChange('email')}
+          validate={[email, required]}
+          />
         <Field
           name={t('login:password')}
           component={this.renderInput}
+          onChange={this.handleChange('password')}
           validate={[alphaNumeric, minLength8, maxLength15, required]}
         />
       </Form>
     );
     return (
-      <Login navigation={this.props.navigation} loginForm={form} onLogin={() => this.login()} />
+      <Login
+        loginForm={form}
+        navigation={navigation}
+        onLogin={() => this.login()}
+      />
     );
   }
 }

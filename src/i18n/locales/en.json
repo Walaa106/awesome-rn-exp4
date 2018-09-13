@@ -23,6 +23,7 @@
     "login": "Login",
     "property-login": "Property Login",
     "email": "email",
-    "password": "password"
+    "password": "password",
+    "error": "Enter Valid Username & password!"
   }
 }
