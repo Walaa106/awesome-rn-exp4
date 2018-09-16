@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate} from 'react-i18next';
+// import { translate} from 'react-i18next';
 
 import { Container, Content, Header, Left, H3, Button, Text, View } from 'native-base';
 
@@ -30,4 +30,5 @@ class Login extends Component {
   }
 }
 
-export default translate(['common'], { wait: true })(Login);
+export default Login;
+// export default translate(['common'], { wait: true })(Login);

@@ -62,7 +62,7 @@
       "node_modules/(?!react-native|native-base|react-navigation)"
     ],
     "setupFiles": [
-      "./setup.js"
+      "./test/setup.js"
     ]
   }
 }
