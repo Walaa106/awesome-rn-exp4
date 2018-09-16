@@ -24,24 +24,26 @@ class LoginForm extends React.Component {
     };
   }
 
-  renderInput({ input: { name, onChange, value }, meta: { touched, error } }) {
+  renderInput({input: { name, onChange, value }, meta: { touched, error }, label }) {
+
     let text;
     let fieldName;
 
     switch (name) {
       case 'email':
-        text = 'Email:';
         fieldName = 'email';
         break;
-      default:
-        text = 'Password:';
+      case 'password':
         fieldName = 'password';
+        break;
+      default:
+        fieldName = '';
     }
     return (
       <InputField
         value={value}
         onChange={onChange}
-        text={text}
+        label={label}
         fieldName={fieldName}
         touched={touched}
         error={error}
@@ -84,13 +86,15 @@ class LoginForm extends React.Component {
     const form = (
       <Form>
         <Field
-          name={t('login:email')}
+          name='email'
+          label={t('login:email')}
           component={this.renderInput}
           onChange={this.handleChange('email')}
           validate={[email, required]}
           />
         <Field
-          name={t('login:password')}
+          name='password'
+          label={t('login:password')}
           component={this.renderInput}
           onChange={this.handleChange('password')}
           validate={[alphaNumeric, minLength8, maxLength15, required]}
@@ -102,6 +106,7 @@ class LoginForm extends React.Component {
         loginForm={form}
         navigation={navigation}
         onLogin={() => this.login()}
+        t={t}
       />
     );
   }
