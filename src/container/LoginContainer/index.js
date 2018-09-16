@@ -8,9 +8,11 @@ import { Field, reduxForm } from 'redux-form';
 import {required, maxLength15, minLength8, email, alphaNumeric} from './validation'
 
 const domain = 'extranet-staging.eu.auth0.com';
+const clientID = 'UPVG0QyxBGcHlJKb1wPhTOhMvsv6cXr7';
+
 const auth0 = new Auth0({
   domain: domain,
-  clientId: 'UPVG0QyxBGcHlJKb1wPhTOhMvsv6cXr7'
+  clientId: clientID
 });
 
 class LoginForm extends React.Component {

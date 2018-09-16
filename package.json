@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "NODE_ENV=test jest --no-cache"
   },
   "dependencies": {
     "i18next": "^11.7.0",
@@ -26,13 +26,29 @@
     "regenerator-runtime": "^0.12.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.4.2",
-    "babel-plugin-dynamic-import-node": "^2.1.0",
+    "@babel/core": "^7.0.1",
+    "@babel/helper-module-transforms": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/types": "^7.0.0",
+    "babel-bridge": "^1.12.11",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-react-native": "^5.0.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^5.0.0",
     "babel-runtime": "^6.26.0",
     "jest": "23.5.0",
     "react-test-renderer": "16.4.1",
@@ -40,11 +56,13 @@
   },
   "jest": {
     "preset": "react-native",
+    "collectCoverage": true,
+    "coverageDirectory": "__coverage__",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?native-base-shoutem-theme)/"
+      "node_modules/(?!react-native|native-base|react-navigation)"
     ],
     "setupFiles": [
-      "./test/setup.js"
+      "./setup.js"
     ]
   }
 }
