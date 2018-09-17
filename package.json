@@ -7,6 +7,7 @@
     "test": "NODE_ENV=test jest --no-cache"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "i18next": "^11.7.0",
     "i18next-react-native-language-detector": "^1.0.2",
     "native-base": "^2.8.0",
@@ -30,13 +31,11 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/types": "^7.0.0",
-    "babel-bridge": "^1.12.11",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-native": "^5.0.0",
-    "babel-runtime": "^6.26.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "jest": "23.5.0",
@@ -48,7 +47,7 @@
     "collectCoverage": true,
     "coverageDirectory": "__coverage__",
     "transformIgnorePatterns": [
-      "node_modules/(?!react-native|native-base|react-navigation)"
+      "node_modules/(?!react-native|native-base|react-navigation|native-base-shoutem-theme)"
     ],
     "setupFiles": [
       "./setup.js"

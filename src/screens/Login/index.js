@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// import { translate} from 'react-i18next';
 import { Container, Content, Header, Left, H3, Button, Text, View } from 'native-base';
 
 import styles from './styles';
 
-class Login extends Component {
-  render() {
+export default class Login extends Component {
+  render = () => {
     const { t, navigation } = this.props;
     return (
         <Container>
@@ -31,5 +30,3 @@ class Login extends Component {
   }
 }
 
-export default Login;
-// export default translate(['common'], { wait: true })(Login);
