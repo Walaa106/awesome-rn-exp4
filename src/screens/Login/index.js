@@ -4,7 +4,7 @@ import { Container, Content, Header, Left, H3, Button, Text, View } from 'native
 import styles from './styles';
 
 export default class Login extends Component {
-  render = () => {
+  render() {
     const { t, navigation } = this.props;
     return (
         <Container>
@@ -26,7 +26,5 @@ export default class Login extends Component {
             </View>
           </Content>
         </Container>
-    )
-  }
+    )}
 }
-
